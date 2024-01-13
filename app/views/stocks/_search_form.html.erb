@@ -1,0 +1,16 @@
+<%= form_for Stock.new, { role: "form", remote: true, url: search_path,
+                          data: { turbo: true },
+                          html: { method: 'GET', id: 'search-stock', "data-type" => :js, role: "form" } } do |f| %>
+  <div class="form-group row">
+    <div class="col-sm-9">
+      <%= f.text_field :ticker,
+                       placeholder: "Stock ticker", autofocus: true,
+                       class: "form-control form-control-large" %>
+    </div>
+    <div class="col-sm-3 no-padding-h">
+      <button type="submit" class="btn btn-success">
+        <%= fa_icon 'search' %>
+      </button>
+    </div>
+  </div>
+<% end %>

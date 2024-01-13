@@ -1,0 +1,11 @@
+<% if @stock != nil %>
+  <div class="col-sm-12">
+    <div class="card card-header card-result">
+      <span><strong>Ticker: </strong><%= @stock.ticker %></span>
+      <span><strong>Name: </strong><%= @stock.name %></span>
+      <span><strong>Price: </strong><%= @stock.last_price %></span>
+    </div>
+  </div>
+<% else %>
+  <span>No stock found</span>
+<% end %>

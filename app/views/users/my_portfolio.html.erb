@@ -1,30 +1,37 @@
 <h1>My Portfolio</h1>
 
 <div class="search-area">
-
   <h3>Search stocks</h3>
-  <%= form_tag search_stock_path, method: :get do %>
+
+  <form data-turbo="true" id="form-id" data-type="js" role="form" action="/search" accept-charset="UTF-8" data-remote="true" method="get">
     <div class="form-group row">
       <div class="col-sm-9">
-        <%= text_field_tag :stock, params[:stock],
-                           placeholder: "Stock ticker", autofocus: true,
-                           class: "form-control form-control-large" %>
+        <input placeholder="Stock ticker" autofocus="autofocus" class="form-control form-control-large" type="text" name="stock[ticker]" id="stock_ticker">
       </div>
       <div class="col-sm-3 no-padding-h">
-        <%= button_tag type: :submit, class: "btn btn-success" do %>
-          <% fa_icon 'search' %>
-        <% end %>
+        <button type="submit" class="btn btn-success">
+          <i class="fa fa-search"></i>
+        </button>
       </div>
     </div>
-  <% end %>
+  </form>
 </div>
 
-<% if @stock != nil %>
-  <div class="col-sm-12">
-  <div class="card card-header card-result">
-    <span><strong>Ticker: </strong><%= @stock.ticker %></span>
-    <span><strong>Name: </strong><%= @stock.name %></span>
-    <span><strong>Price: </strong><%= @stock.last_price %></span>
-  </div>
-  </div>
-<% end %>
+<div id="search-stock-result"></div>
+
+<script>
+    window.addEventListener("load", () => {
+
+        $('#form-id').submit(function() {
+            const valuesToSubmit = $(this).serialize();
+            console.log('valuesToSubmit',valuesToSubmit);
+            $.ajax({
+                type: "GET",
+                url: $(this).attr('action'),
+                data: valuesToSubmit + '&stock%5Bjs%5D=true',
+                headers: { 'Accept': 'application/javascript' }
+            });
+            return false;
+        });
+    });
+</script>
