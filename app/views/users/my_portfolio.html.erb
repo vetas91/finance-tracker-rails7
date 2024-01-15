@@ -3,7 +3,7 @@
 <div class="search-area">
   <h3>Search stocks</h3>
 
-  <form data-turbo="true" id="form-id" data-type="js" role="form" action="/search" accept-charset="UTF-8" data-remote="true" method="get">
+  <form data-turbo="true" id="form-id" data-type="js" role="form" action="/search.js" accept-charset="UTF-8" data-remote="true" method="get">
     <div class="form-group row">
       <div class="col-sm-9">
         <input placeholder="Stock ticker" autofocus="autofocus" class="form-control form-control-large" type="text" name="stock[ticker]" id="stock_ticker">
@@ -28,7 +28,7 @@
             $.ajax({
                 type: "GET",
                 url: $(this).attr('action'),
-                data: valuesToSubmit + '&stock%5Bjs%5D=true',
+                data: valuesToSubmit,
                 headers: { 'Accept': 'application/javascript' }
             });
             return false;

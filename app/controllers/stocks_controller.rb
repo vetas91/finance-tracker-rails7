@@ -1,25 +1,19 @@
 class StocksController < ApplicationController
+  skip_after_action :verify_same_origin_request
 
   def search
-    # binding.break
-    if params[:stock] && params[:stock][:js] == "true"
+    @stock = nil
+    if params[:stock]
       if params[:stock][:ticker]
         ticker = params[:stock][:ticker]
         @stock = Stock.new_lookup(ticker)
-        # if @stock != nil
-          respond_to do |format|
-            format.js { render partial: 'stocks/search_stock' }
-          end
-        # else
-        #   flash[:alert] = 'Invalid ticker'
-        #   redirect_to my_portfolio_path
-        # end
+        respond_to do |format|
+          format.js { render partial: 'stocks/search_stock' }
+        end
       else
         flash[:alert] = 'Please enter the ticker'
-        redirect_to my_portfolio_path
+        render :edit, status: :unprocessable_entity
       end
-    else
-      render json: nil
     end
   end
 end

@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get '/my_portfolio', to: 'users#my_portfolio'
   get 'search_stock_js', to: 'stocks#search_stock'
   get 'search', to: 'stocks#search'
+  post 'search', to: 'stocks#search'
 end
