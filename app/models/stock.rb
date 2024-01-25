@@ -11,7 +11,6 @@ class Stock < ApplicationRecord
         return new(ticker: "VOO", name: "Vanguard", last_price: 444)
       end
       begin
-        binding.b
         new(ticker: ticker, name: client.company(ticker).company_name, last_price: client.price(ticker))
       rescue => exception
         return nil

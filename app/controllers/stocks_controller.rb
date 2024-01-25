@@ -7,12 +7,21 @@ class StocksController < ApplicationController
       if params[:stock][:ticker]
         ticker = params[:stock][:ticker]
         @stock = Stock.new_lookup(ticker)
-        respond_to do |format|
-          format.js { render partial: 'stocks/search_stock' }
+        if @stock != nil
+          respond_to do |format|
+            format.js { render partial: 'stocks/search_stock' }
+          end
+        else
+          respond_to do |format|
+            flash.now[:alert] = 'Invalid ticker'
+            format.js { render partial: 'stocks/search_stock' }
+          end
         end
       else
-        flash[:alert] = 'Please enter the ticker'
-        render :edit, status: :unprocessable_entity
+        respond_to do |format|
+          flash.now[:alert] = 'Please enter the ticker'
+          format.js { render partial: 'stocks/search_stock' }
+        end
       end
     end
   end
