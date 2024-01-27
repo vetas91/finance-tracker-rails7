@@ -5,6 +5,7 @@
     <th scope="col">Ticker</th>
     <th scope="col">Name</th>
     <th scope="col">Price</th>
+    <th scope="col">Actions</th>
   </tr>
   </thead>
   <tbody>
@@ -14,6 +15,8 @@
       <td><%= stock.ticker %></td>
       <td><%= stock.name %></td>
       <td><%= stock.last_price.nil? ? '-' : stock.last_price %></td>
+      <td><%= link_to "Remove", user_stock_path(stock), class: "btn btn-secondary",
+                      data: { "turbo-method": :delete, turbo_confirm: "are you sure to remove from favorite?" } %></td>
     </tr>
   <% end %>
   </tbody>

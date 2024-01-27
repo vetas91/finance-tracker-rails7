@@ -22,4 +22,8 @@ class Stock < ApplicationRecord
     end
   end
 
+  def self.check_in_db (ticker)
+    Stock.where(ticker: ticker).first
+  end
+
 end

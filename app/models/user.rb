@@ -6,4 +6,19 @@ class User < ApplicationRecord
 
   has_many :user_stocks
   has_many :stocks, through: :user_stocks
+
+
+  def has_stock(ticker)
+    stock = Stock.check_in_db(ticker)
+    return false unless stock
+    !stocks.where(id: stock.id).blank?
+  end
+
+  def has_space
+    stocks.count < 2
+  end
+
+  def can_track(ticker)
+    has_space && !has_stock(ticker)
+  end
 end
