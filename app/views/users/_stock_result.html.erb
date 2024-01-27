@@ -1,13 +1,13 @@
 <div class="col-sm-12">
-    <div class="card card-header card-result">
-  <% if @stock != nil %>
+  <div class="card card-header card-result">
+    <% if @stock != nil %>
       <span><strong>Ticker: </strong><%= @stock.ticker %></span>
       <span><strong>Name: </strong><%= @stock.name %></span>
       <span><strong>Price: </strong><%= @stock.last_price %></span>
 
-  <% else %>
-    <%= render 'layouts/messages' %>
-    <span>No stock found</span>
-  <% end %>
-    </div>
+    <% else %>
+      <%= render 'layouts/messages' %>
+      <span>No stock found</span>
+    <% end %>
+  </div>
 </div>
