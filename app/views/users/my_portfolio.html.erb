@@ -19,17 +19,21 @@
 
 <div id="search-stock-result"></div>
 
+<% if !@tracked_stocks.empty? %>
+  <%= render 'stocks/list' %>
+<% end %>
+
 <script>
     window.addEventListener("load", () => {
 
-        $('#form-id').submit(function() {
+        $('#form-id').submit(function () {
             const valuesToSubmit = $(this).serialize();
-            console.log('valuesToSubmit',valuesToSubmit);
+            console.log('valuesToSubmit', valuesToSubmit);
             $.ajax({
                 type: "GET",
                 url: $(this).attr('action'),
                 data: valuesToSubmit,
-                headers: { 'Accept': 'application/javascript' }
+                headers: {'Accept': 'application/javascript'}
             });
             return false;
         });
