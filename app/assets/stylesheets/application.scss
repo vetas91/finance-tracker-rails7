@@ -11,5 +11,10 @@
 }
 
 .card-result {
-  margin-top: 0.5rem;
+  margin: .5rem 0;
+}
+
+.container-header {
+  display: flex;
+  flex-direction: row;
 }
