@@ -8,6 +8,17 @@
     <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
   </div>
 
+  <div class="row form-group">
+    <div class="col">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: "form-control", placeholder: 'Last name'%>
+    </div>
+    <div class="col">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: "form-control", placeholder: 'Last name' %>
+    </div>
+  </div>
+
   <div class="form-group">
     <%= f.label :password %>
     <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
@@ -21,7 +32,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :current_password %>
+    <%= f.label :current_password %> *
     <%= f.password_field :current_password, autocomplete: 'current-password', class: 'form-control' %>
 
     <small class="form-text text-muted"><%= t('.we_need_your_current_password_to_confirm_your_changes') %></small>

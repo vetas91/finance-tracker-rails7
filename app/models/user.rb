@@ -7,7 +7,6 @@ class User < ApplicationRecord
   has_many :user_stocks
   has_many :stocks, through: :user_stocks
 
-
   def has_stock(ticker)
     stock = Stock.check_in_db(ticker)
     return false unless stock
@@ -20,5 +19,13 @@ class User < ApplicationRecord
 
   def can_track(ticker)
     has_space && !has_stock(ticker)
+  end
+
+  def full_name
+    if first_name || last_name
+      "#{first_name} #{last_name}"
+    else
+      "Anonymous"
+    end
   end
 end
