@@ -30,4 +30,20 @@ class User < ApplicationRecord
       "Anonymous"
     end
   end
+
+  def except_current_user(users)
+    users.reject { |user| user.id == self.id}
+  end
+
+  def self.search(search_param)
+    cleaned = search_param.strip
+    response = (matches('email', cleaned).or(matches('first_name', cleaned)).or(matches('last_name', cleaned))).uniq
+    return nil unless response
+    response
+  end
+
+  def self.matches(field_name, param)
+    where("#{field_name} like ?", "%#{param}%")
+  end
+
 end

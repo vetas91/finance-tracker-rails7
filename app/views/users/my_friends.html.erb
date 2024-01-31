@@ -1,0 +1,41 @@
+<h1>My Friends</h1>
+
+<div class="search-area">
+  <h3>Search friend</h3>
+
+  <form data-turbo="true" id="form-id" data-type="js" role="form" action="/search_user.js" accept-charset="UTF-8" data-remote="true" method="get">
+    <div class="form-group row">
+      <div class="col-sm-9">
+        <input placeholder="Enter friend" autofocus="autofocus" class="form-control form-control-large" type="text" name="user[search]" id="search_user">
+      </div>
+      <div class="col-sm-3 no-padding-h">
+        <button type="submit" class="btn btn-success">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div id="search-user-result"></div>
+
+<% if !@tracked_friends.empty? %>
+  <%= render 'users/friends_list' %>
+<% end %>
+
+<script>
+    window.addEventListener("load", () => {
+
+        $('#form-id').submit(function () {
+            const valuesToSubmit = $(this).serialize();
+            console.log('valuesToSubmit', valuesToSubmit);
+            $.ajax({
+                type: "GET",
+                url: $(this).attr('action'),
+                data: valuesToSubmit,
+                headers: {'Accept': 'application/javascript'}
+            });
+            return false;
+        });
+    });
+</script>

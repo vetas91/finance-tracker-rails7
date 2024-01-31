@@ -1,0 +1,36 @@
+<div class="col-sm-12">
+  <div class="card card-header card-result">
+    <% if @searched_users != nil %>
+      <table>
+        <thead>
+        <tr>
+          <th scope="col">Email</th>
+          <th scope="col">Name</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <% @searched_users.each do |user| %>
+          <tbody class="col-md-12">
+          <tr>
+
+            <td><%= link_to '#', class: 'nav-link' do %><%= user.email %>
+              <% end %></td>
+
+            <td><%= link_to '#', class: 'nav-link' do %><%= user.full_name %>
+              <% end %></td>
+
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%# if current_user.can_track(@stock.ticker) %>
+      <%#= link_to 'Add to favorite', user_stocks_path(user: current_user, ticker: @stock.ticker), class: "btn btn-xs btn-success", data: { "turbo-method": :post } %>
+      <%# else %>
+      <!--        <span>Already tracked</span>-->
+      <%# end %>
+    <% else %>
+      <%= render 'layouts/messages' %>
+      <span>No user found</span>
+    <% end %>
+  </div>
+</div>
