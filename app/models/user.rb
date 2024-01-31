@@ -35,6 +35,10 @@ class User < ApplicationRecord
     users.reject { |user| user.id == self.id}
   end
 
+  def in_friendship_with?(id)
+    self.friends.where(id: id).exists?
+  end
+
   def self.search(search_param)
     cleaned = search_param.strip
     response = (matches('email', cleaned).or(matches('first_name', cleaned)).or(matches('last_name', cleaned))).uniq
