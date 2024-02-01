@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   get 'search', to: 'stocks#search'
   post 'search', to: 'stocks#search'
   get 'search_user', to: 'users#search'
+  resources :users, only: [:show]
 end

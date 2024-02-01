@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  protect_from_forgery except: :index
   def my_portfolio
     @tracked_stocks = current_user.stocks
   end
@@ -32,5 +33,11 @@ class UsersController < ApplicationController
         end
       end
     end
+  end
+
+
+  def show
+    @user = User.find(params[:id])
+    @tracked_stocks = @user.stocks
   end
 end

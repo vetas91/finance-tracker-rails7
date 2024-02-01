@@ -1,0 +1,39 @@
+<div class="col-sm-12">
+  <div class="card card-header card-result">
+
+    <table>
+      <thead>
+      <tr>
+        <th scope="col">Email</th>
+        <th scope="col">Name</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+        <tbody class="col-md-12">
+        <tr>
+
+          <td><%= link_to user_path(@user), class: 'nav-link' do %><%= @user.email %>
+            <% end %></td>
+
+          <td><%= link_to user_path(@user), class: 'nav-link' do %><%= @user.full_name %>
+            <% end %></td>
+
+          <td>
+            <% if current_user.in_friendship_with?(@user.id) %>
+              <%= link_to "Unfollow", friendship_path(@user), class: "badge bg-secondary",
+                          data: { "turbo-method": :delete, turbo_confirm: "are you sure to unfollow #{@user.full_name}?" } %>
+            <% else %>
+              <%= link_to "Follow", friendships_path(friend: @user),
+                          class: 'badge bg-secondary', data: { "turbo-method": :post } %>
+            <% end %>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<% if !@tracked_stocks.empty? %>
+  <%= render 'stocks/list' %>
+<% end %>

@@ -12,7 +12,7 @@ class User < ApplicationRecord
   def has_stock(ticker)
     stock = Stock.check_in_db(ticker)
     return false unless stock
-    !stocks.where(id: stock.id).blank?
+    !user_stocks.where(id: stock.id).blank?
   end
 
   def has_space

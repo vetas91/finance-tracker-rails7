@@ -15,8 +15,24 @@
       <td><%= stock.ticker %></td>
       <td><%= stock.name %></td>
       <td><%= stock.last_price.nil? ? '-' : stock.last_price %></td>
-      <td><%= link_to "Remove", user_stock_path(stock), class: "btn btn-secondary",
-                      data: { "turbo-method": :delete, turbo_confirm: "are you sure to remove from favorite?" } %></td>
+      <td>
+        <% if @user != nil %>
+          <% if current_user.can_track(stock.ticker) %>
+            <%= link_to 'Add to favorite', user_stocks_path(user: current_user, ticker: stock.ticker),
+                        class: "badge bg-secondary", data: { "turbo-method": :post } %>
+          <% else %>
+            <% if !current_user.has_space %>
+              <span class="badge bg-secondary">Couldn't add more</span>
+            <% else %>
+              <span class="badge bg-secondary">Already tracked</span>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if @user == nil || current_user.id == @user.id %>
+          <%= link_to "Remove", user_stock_path(stock), class: "badge bg-secondary",
+                      data: { "turbo-method": :delete, turbo_confirm: "are you sure to remove from favorite?" } %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
   </tbody>

@@ -14,7 +14,9 @@
       <td><%= user.email %></td>
       <td><%= user.first_name %></td>
       <td><%= user.last_name %></td>
-      <td><%= link_to "Remove", friendship_path(user), class: "btn btn-secondary",
+      <td>
+        <%= link_to "View", user_path(user), class: "badge bg-secondary" %>
+        <%= link_to "Remove", friendship_path(user), class: "badge bg-secondary",
                       data: { "turbo-method": :delete, turbo_confirm: "are you sure to remove from favorite?" } %></td>
     </tr>
   <% end %>

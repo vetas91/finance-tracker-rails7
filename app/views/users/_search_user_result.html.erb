@@ -13,12 +13,11 @@
           <tbody class="col-md-12">
           <tr>
 
-            <td><%= link_to '#', class: 'nav-link' do %><%= user.email %>
+            <td><%= link_to user_path(user), class: 'nav-link' do %><%= user.email %>
               <% end %></td>
 
-            <td><%= link_to '#', class: 'nav-link' do %><%= user.full_name %>
+            <td><%= link_to user_path(user), class: 'nav-link' do %><%= user.full_name %>
               <% end %></td>
-
 
             <td>
               <% if current_user.in_friendship_with?(user.id) %>
